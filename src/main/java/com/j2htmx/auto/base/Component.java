@@ -1,0 +1,373 @@
+package com.j2htmx.auto.base;
+
+
+public abstract class Component extends NodeCreator {
+
+    public Component clazz(String clazz) {
+        setClass(clazz);
+        return this;
+    }
+
+    public Component addClazz(String clazz) {
+        addClass(clazz);
+        return this;
+    }
+
+    public Component style(String style) {
+        setStyle(style);
+        return this;
+    }
+
+    public Component styleRaw(String style) {
+        setStyleViaString(style);
+        return this;
+    }
+
+    public Component id(String id) {
+        setId(id);
+        return this;
+    }
+
+    public Component name(String name) {
+        setName(name);
+        return this;
+    }
+
+    public Component type(String type) {
+        setType(type);
+        return this;
+    }
+
+    public Component placeholder(String placeholder) {
+        setPlaceholder(placeholder);
+        return this;
+    }
+
+    public Component width(String width) {
+        setWidth(width);
+        return this;
+    }
+
+    public Component height(String height) {
+        setHeight(height);
+        return this;
+    }
+
+    public Component href(String href) {
+        setNodeLink(href);
+        return this;
+    }
+
+    public Component include(String selector) {
+        setHxInclude(selector);
+        return this;
+    }
+
+    public Component vals(String vals) {
+        setHxVals(vals);
+        return this;
+    }
+
+    public Component on(String event) {
+        setHxOn(event);
+        return this;
+    }
+
+    public Component oob() {
+        setHxOutOfOrderSwap();
+        return this;
+    }
+
+    public Component source(String source) {
+        setSource(source);
+        return this;
+    }
+
+    public Component content(String content) {
+        setContent(content);
+        return this;
+    }
+
+    public Component content(NodeCreator... nodes) {
+        setContent(nodes);
+        return this;
+    }
+
+    public Component add(NodeCreator... nodes) {
+        addContent(nodes);
+        return this;
+    }
+
+    public Component add(String content) {
+        addContent(content);
+        return this;
+    }
+
+    public Component row() {
+        addClass("j2-row");
+        return this;
+    }
+
+    public Component column() {
+        addClass("j2-column");
+        return this;
+    }
+
+    public Component grid() {
+        addClass("j2-grid");
+        return this;
+    }
+
+    public Component grid(int columns) {
+        addClass("j2-grid-" + columns);
+        return this;
+    }
+
+    public Component gridAuto() {
+        addClass("j2-grid-auto");
+        return this;
+    }
+
+    public Component center() {
+        addClass("j2-center");
+        return this;
+    }
+
+    public Component justifyStart() {
+        addClass("j2-justify-start");
+        return this;
+    }
+
+    public Component justifyCenter() {
+        addClass("j2-justify-center");
+        return this;
+    }
+
+    public Component justifyEnd() {
+        addClass("j2-justify-end");
+        return this;
+    }
+
+    public Component justifyBetween() {
+        addClass("j2-justify-between");
+        return this;
+    }
+
+    public Component justifyAround() {
+        addClass("j2-justify-around");
+        return this;
+    }
+
+    public Component justifyEvenly() {
+        addClass("j2-justify-evenly");
+        return this;
+    }
+
+    public Component alignStart() {
+        addClass("j2-align-start");
+        return this;
+    }
+
+    public Component alignCenter() {
+        addClass("j2-align-center");
+        return this;
+    }
+
+    public Component alignEnd() {
+        addClass("j2-align-end");
+        return this;
+    }
+
+    public Component alignStretch() {
+        addClass("j2-align-stretch");
+        return this;
+    }
+    public Component gap(int size) {
+        addClass("j2-gap-" + size);
+        return this;
+    }public Component fullWidth() {
+        addClass("j2-w-full");
+        return this;
+    }
+
+    public Component halfWidth() {
+        addClass("j2-w-half");
+        return this;
+    }
+
+    public Component thirdWidth() {
+        addClass("j2-w-third");
+        return this;
+    }
+
+    public Component quarterWidth() {
+        addClass("j2-w-quarter");
+        return this;
+    }
+
+    public Component autoWidth() {
+        addClass("j2-w-auto");
+        return this;
+    }
+    public Component fullHeight() {
+        addClass("j2-h-full");
+        return this;
+    }
+
+    public Component screenHeight() {
+        addClass("j2-h-screen");
+        return this;
+    }
+    public Component margin(int size) {
+        addClass("j2-m-" + size);
+        return this;
+    }
+    public Component padding(int size) {
+        addClass("j2-p-" + size);
+        return this;
+    }
+    public Component container() {
+        addClass("j2-container");
+        return this;
+    }
+
+    public Component containerSm() {
+        addClass("j2-container-sm");
+        return this;
+    }
+
+    public Component containerMd() {
+        addClass("j2-container-md");
+        return this;
+    }
+
+    public Component containerLg() {
+        addClass("j2-container-lg");
+        return this;
+    }
+
+    public Component containerXl() {
+        addClass("j2-container-xl");
+        return this;
+    }
+    public Component card() {
+        addClass("j2-card");
+        return this;
+    }
+
+    public Component shadow() {
+        addClass("j2-card-shadow");
+        return this;
+    }
+    public Component textLeft() {
+        addClass("j2-text-left");
+        return this;
+    }
+
+    public Component textCenter() {
+        addClass("j2-text-center");
+        return this;
+    }
+
+    public Component textRight() {
+        addClass("j2-text-right");
+        return this;
+    }
+
+    public Component bold() {
+        addClass("j2-bold");
+        return this;
+    }
+
+    public Component rowSpan(int rows) {
+        addClass("j2-row-span-" + rows);
+        return this;
+    }
+
+    public Component newRow() {
+        addClass("j2-new-row");
+        return this;
+    }
+
+    public Component colStart(int col) {
+        addClass("j2-col-start-" + col);
+        return this;
+    }
+    public Component rowStart(int row) {
+        addClass("j2-row-start-" + row);
+        return this;
+    }
+
+    public Component pushRight() {
+        addClass("j2-push-right");
+        return this;
+    }
+    public Component pushBottom() {
+        addClass("j2-push-bottom");
+        return this;
+    }
+    public Component order(int order) {
+        addClass("j2-order-" + order);
+        return this;
+    }
+    public Component colSpan(int cols) {
+        addClass("j2-col-span-" + cols);
+        return this;
+    }
+    public Component grow() {
+        addClass("j2-grow");
+        return this;
+    }
+    public Component shrink() {
+        addClass("j2-shrink");
+        return this;
+    }
+    public Component italic() {
+        addClass("j2-italic");
+        return this;
+    }
+    public Component hidden() {
+        addClass("j2-hidden");
+        return this;
+    }
+
+    public Component block() {
+        addClass("j2-block");
+        return this;
+    }
+
+    public Component inline() {
+        addClass("j2-inline");
+        return this;
+    }
+
+    public Component inlineBlock() {
+        addClass("j2-inline-block");
+        return this;
+    }
+    public Component get(String url) {
+        setHxGet(url);
+        return this;
+    }
+
+    public Component post(String url) {
+        setHxPost(url);
+        return this;
+    }
+
+    public Component target(String target) {
+        setHxTarget(target);
+        return this;
+    }
+
+    public Component swap(String swap) {
+        setHxSwap(swap);
+        return this;
+    }
+
+    public Component trigger(String trigger) {
+        setHxTrigger(trigger);
+        return this;
+    }
+}
+
