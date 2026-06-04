@@ -25,6 +25,7 @@ public abstract class Component extends NodeCreator {
 
     public Component id(String id) {
         setId(id);
+        setRawId(id);
         return this;
     }
 
@@ -367,6 +368,82 @@ public abstract class Component extends NodeCreator {
 
     public Component trigger(String trigger) {
         setHxTrigger(trigger);
+        return this;
+    }
+    public Component target(NodeCreator node) {
+
+        if (node.id == null) {
+            throw new RuntimeException(
+                    "Target component must have id"
+            );
+        }
+
+        setHxTarget("#" + node.rawId);
+
+        return this;
+    }
+
+    public Component inner() {
+
+        setHxSwap("innerHTML");
+
+        return this;
+    }
+
+    public Component outer() {
+
+        setHxSwap("outerHTML");
+
+        return this;
+    }
+
+
+    public Component before() {
+
+        setHxSwap("beforebegin");
+
+        return this;
+    }
+
+    public Component after() {
+
+        setHxSwap("afterend");
+
+        return this;
+    }
+
+    public Component delete() {
+
+        setHxSwap("delete");
+
+        return this;
+    }
+    public Component replaceContent() {
+        setHxSwap("innerHTML");
+        return this;
+    }
+
+    public Component replaceOuter() {
+        setHxSwap("outerHTML");
+        return this;
+    }
+
+    public Component append() {
+        setHxSwap("beforeend");
+        return this;
+    }
+
+    public Component prepend() {
+        setHxSwap("afterbegin");
+        return this;
+    }
+
+    public Component appendTo(NodeCreator node) {
+
+        target(node);
+
+        append();
+
         return this;
     }
 }

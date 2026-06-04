@@ -170,7 +170,7 @@ public class Page extends Component {
         if (useHtmx) {
 
             html.append("""
-                <script src="https://unpkg.com/htmx.org@2.0.7"></script>
+                <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.10/dist/htmx.min.js" integrity="sha384-H5SrcfygHmAuTDZphMHqBJLc3FhssKjG7w/CeCpFReSfwBWDTKpkzPP8c+cLsK+V" crossorigin="anonymous"></script>
                 """);
         }
 

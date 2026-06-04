@@ -103,6 +103,7 @@ public class NodeCreator implements Serializable, HtmxNode {
     protected String misc = "";
     protected String classStyle = "";
     protected String For = "";
+    protected String rawId = "";
     protected String content = "";
     protected String hxOn = "";
     protected String placeholder = "";
@@ -275,6 +276,10 @@ public class NodeCreator implements Serializable, HtmxNode {
 
     public void setId(String id) {
         this.id = " id='" + id + "'";
+    }
+
+    public void setRawId(String id) {
+        this.rawId = id;
     }
 
     public void setContent(NodeCreator... nodeCreators) {
