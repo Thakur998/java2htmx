@@ -34,7 +34,7 @@ class DefaultNodeRenderStrategy implements NodeRenderStrategy {
         sb.append(node.hxTarget);
         sb.append(node.hxInclude);
         sb.append(node.hxTrigger);
-
+        for (String custom : node.customTags) sb.append(custom);
         return sb.toString();
     }
 
@@ -125,7 +125,7 @@ public class NodeCreator implements Serializable, HtmxNode {
     protected String height = "";
     protected String hxPost = "";
     protected String id = "";
-
+    protected List<String> customTags = new ArrayList<>();
     private final NodeRenderStrategy renderStrategy;
     private final StyleManager styleManager;
 
@@ -272,6 +272,14 @@ public class NodeCreator implements Serializable, HtmxNode {
 
     public void setHeight(String height) {
         this.height = " height = " + height;
+    }
+
+    public void setCustomTag(String key, String value) {
+        customTags.add(" "+key+"='"+value+"'");
+    }
+
+    public void setCustomTag(String key) {
+        customTags.add(" " + key);
     }
 
     public void setId(String id) {

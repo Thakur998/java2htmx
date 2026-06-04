@@ -42,6 +42,12 @@ public abstract class Component extends NodeCreator {
         return this;
     }
 
+
+    public Component customTag(String key, String value) {
+        customTags.add(" " + key + "=\"" + value + "\"");
+        return this;
+    }
+
     public Component below(int size) {
 
         addClass("j2-mb-" + size);

@@ -7,9 +7,7 @@ import com.j2htmx.auto.components.*;
 @Node
 public class LoginPage extends Page {
     public LoginPage() {
-
-        cssFile("login.css");
-
+        cssFile("dashboard.css");
         var navbar = navbar();
         var loginForm = new Form(
                 new Label("Enter User").forId("user").name("user"),

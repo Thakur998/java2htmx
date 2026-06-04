@@ -1,5 +1,6 @@
 package com.j2htmx.auto.components;
 
+import com.j2htmx.auto.base.Component;
 import com.j2htmx.auto.base.TagComponent;
 
 public class H4 extends TagComponent {
@@ -7,5 +8,11 @@ public class H4 extends TagComponent {
     public H4(String text) {
         super("h1");
         setContent(text);
+    }
+
+
+    public H4(Component component) {
+        super("h1");
+        setContent(component);
     }
 }
