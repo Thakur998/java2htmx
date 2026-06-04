@@ -1,24 +1,28 @@
 package com.j2htmx.auto.controller;
 
-import com.j2htmx.auto.components.Div;
 import com.j2htmx.auto.components.Label;
-import com.j2htmx.auto.demo.todo.ToDoListDemo;
+import com.j2htmx.auto.demo.beans.LoginDetail;
+import com.j2htmx.auto.demo.pages.Dashboard;
+import com.j2htmx.auto.demo.pages.LoginPage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class DemoController {
-    @Autowired
-    ToDoListDemo toDoListDemo;
 
-    @GetMapping("/todo")
-    public String todo() {
-        return toDoListDemo.render();
+    @Autowired
+    public LoginPage loginPage;
+
+    @Autowired
+    public Dashboard dashboard;
+
+    @GetMapping("/login")
+    public String loginPage() {
+        return loginPage.render();
     }
 
-    @GetMapping("/add")
-    public String label() {
-        return new Div(new Label("Item")).render();
+    @PostMapping("/login-user")
+    public String login(@ModelAttribute LoginDetail loginDetail) {
+        return dashboard.render();
     }
 }

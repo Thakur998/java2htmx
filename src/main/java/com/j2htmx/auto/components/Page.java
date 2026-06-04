@@ -159,10 +159,17 @@ public class Page extends Component {
                     .append("'>");
         }
 
+
+        //Custom sheet
+        html.append("<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css\">");
+        html.append("<link\n" +
+                "  rel=\"stylesheet\"\n" +
+                "  href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css\"\n" +
+                ">");
         for (String css : cssFiles) {
 
             html.append(
-                            "<link rel='stylesheet' href='")
+                            "<link rel='stylesheet' href='/css/")
                     .append(css)
                     .append("'>");
         }

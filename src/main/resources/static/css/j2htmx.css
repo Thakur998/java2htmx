@@ -333,3 +333,15 @@
     align-items:center;
     min-height:100vh;
 }
+
+.j2-next-row {
+    grid-column: 1 / -1;
+}
+
+.j2-mt-1 { margin-top: .5rem; }
+.j2-mt-2 { margin-top: 1rem; }
+.j2-mt-3 { margin-top: 2rem; }
+
+.j2-mb-1 { margin-bottom: .5rem; }
+.j2-mb-2 { margin-bottom: 1rem; }
+.j2-mb-3 { margin-bottom: 2rem; }

@@ -1,10 +1,22 @@
 package com.j2htmx.auto.base;
 
 
+import com.j2htmx.auto.components.Form;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public abstract class Component extends NodeCreator {
 
     public Component clazz(String clazz) {
         setClass(clazz);
+        return this;
+    }
+
+    public Component as(String tag) {
+
+        setTag(tag);
+
         return this;
     }
 
@@ -20,6 +32,20 @@ public abstract class Component extends NodeCreator {
 
     public Component styleRaw(String style) {
         setStyleViaString(style);
+        return this;
+    }
+
+    public Component above(int size) {
+
+        addClass("j2-mt-" + size);
+
+        return this;
+    }
+
+    public Component below(int size) {
+
+        addClass("j2-mb-" + size);
+
         return this;
     }
 
@@ -116,6 +142,11 @@ public abstract class Component extends NodeCreator {
 
     public Component grid() {
         addClass("j2-grid");
+        return this;
+    }
+
+    public Component nextRow() {
+        addClass("j2-next-row");
         return this;
     }
 
@@ -251,15 +282,7 @@ public abstract class Component extends NodeCreator {
         addClass("j2-container-xl");
         return this;
     }
-    public Component card() {
-        addClass("j2-card");
-        return this;
-    }
 
-    public Component shadow() {
-        addClass("j2-card-shadow");
-        return this;
-    }
     public Component textLeft() {
         addClass("j2-text-left");
         return this;
@@ -461,5 +484,138 @@ public abstract class Component extends NodeCreator {
         addClass("j2-center-screen");
         return this;
     }
+
+    public Component with(
+            NodeCreator... components) {
+
+        String include =
+                Arrays.stream(components)
+                        .map(component ->
+                                "#" + component.rawId)
+                        .collect(
+                                Collectors.joining(",")
+                        );
+
+        setHxInclude(include);
+
+        return this;
+    }
+
+    public Component with(
+            String... components) {
+
+        String include =
+                Arrays.stream(components)
+                        .map(component ->
+                                "#" + component)
+                        .collect(
+                                Collectors.joining(",")
+                        );
+
+        setHxInclude(include);
+
+        return this;
+    }
+
+    public Component with(Form form) {
+
+        return with(
+                (NodeCreator) form
+        );
+    }
+
+    public Component replace(NodeCreator target) {
+
+        target(target);
+        outer();
+
+        return this;
+    }
+
+    public Component update(NodeCreator target) {
+
+        target(target);
+        inner();
+
+        return this;
+    }
+
+    public Component prependTo(NodeCreator target) {
+
+        target(target);
+        prepend();
+
+        return this;
+    }
+    public Component onClick() {
+
+        setHxTrigger("click");
+
+        return this;
+    }
+
+    public Component onChange() {
+
+        setHxTrigger("change");
+
+        return this;
+    }
+
+    public Component onLoad() {
+
+        setHxTrigger("load");
+
+        return this;
+    }
+
+    public Component onSubmit() {
+
+        setHxTrigger("submit");
+
+        return this;
+    }
+    public Component onTrigger(String event) {
+        setHxTrigger(event);
+        return this;
+    }
+
+    public enum HxTrigger {
+
+        CLICK("click"),
+        CHANGE("change"),
+        SUBMIT("submit"),
+        LOAD("load"),
+
+        KEYUP("keyup"),
+        KEYDOWN("keydown"),
+        KEYPRESS("keypress"),
+
+        BLUR("blur"),
+        FOCUS("focus"),
+
+        MOUSE_ENTER("mouseenter"),
+        MOUSE_LEAVE("mouseleave"),
+
+        REVEALED("revealed"),
+        INTERSECT("intersect");
+
+        private final String value;
+
+        HxTrigger(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
+    }
+
+    public Component onTrigger(HxTrigger trigger) {
+
+        setHxTrigger(trigger.value());
+
+        return this;
+    }
+
 }
 
