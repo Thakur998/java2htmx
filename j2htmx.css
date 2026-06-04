@@ -316,3 +316,20 @@
 .j2-shrink {
     flex-shrink: 1;
 }
+
+.j2-center-x {
+    display:flex;
+    justify-content:center;
+}
+
+.j2-center-y {
+    display:flex;
+    align-items:center;
+}
+
+.j2-center-screen {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}

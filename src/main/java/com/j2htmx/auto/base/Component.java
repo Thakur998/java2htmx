@@ -446,5 +446,20 @@ public abstract class Component extends NodeCreator {
 
         return this;
     }
+
+    public Component centerX() {
+        addClass("j2-center-x");
+        return this;
+    }
+
+    public Component centerY() {
+        addClass("j2-center-y");
+        return this;
+    }
+
+    public Component centerScreen() {
+        addClass("j2-center-screen");
+        return this;
+    }
 }
 

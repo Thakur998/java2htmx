@@ -162,7 +162,7 @@ public class Page extends Component {
         for (String css : cssFiles) {
 
             html.append(
-                            "<link rel='stylesheet' href='/css/")
+                            "<link rel='stylesheet' href='")
                     .append(css)
                     .append("'>");
         }
