@@ -231,7 +231,7 @@ public class NodeCreator implements Serializable, HtmxNode {
     }
 
     public void setStyleViaString(String styleClass) {
-        this.style = styleClass;
+        this.style = " style='" + styleClass + "' ";
     }
 
     public void setStyle(String styleClass) {

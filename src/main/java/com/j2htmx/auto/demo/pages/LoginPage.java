@@ -19,7 +19,7 @@ public class LoginPage extends Page {
 
         var container = new Div(
                 loginForm.above(3)
-        ).as("article").addClazz("pico-color-jade-100");
+        ).as("article").addClazz("pico-background-violet-50");
 
         setContent(navbar, container);
     }
@@ -28,9 +28,65 @@ public class LoginPage extends Page {
 
         var nav = new Div(
                 new Div(new Div(new Div("School ERP").as("strong").margin(2)).as("li")).as("ul")
-        ).as("nav").clazz("pico-background-jade-500");
+        ).as("nav").clazz("pico-background-violet-500");
         return nav;
     }
 
 
 }
+
+/**
+ *   <div class="container">
+ *         <div class="card">
+ *             <div class="face face1">
+ *                 <div class="content">
+ *                     <div class="icon">
+ *                         <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+ *                     </div>
+ *                 </div>
+ *             </div>
+ *             <div class="face face2">
+ *                 <div class="content">
+ *                     <h3>
+ *                         <a href="https://www.linkedin.com/in/adamdipinto/" target="_blank">_adamdipinto</a>
+ *                     </h3>
+ *                     <p>This is where I network and build my professional protfolio.</p>
+ *                 </div>
+ *             </div>
+ *         </div>
+ *         <div class="card">
+ *             <div class="face face1">
+ *                 <div class="content">
+ *                     <div class="icon">
+ *                         <i class="fa fa-twitter-square" aria-hidden="true"></i>
+ *                     </div>
+ *                 </div>
+ *             </div>
+ *             <div class="face face2">
+ *                 <div class="content">
+ *                     <h3>
+ *                         <a href="https://twitter.com/AdamDipinto" target="_blank">@AdamDipinto</a>
+ *                     </h3>
+ *                     <p>This is where I read news and network with different social groups.</p>
+ *                 </div>
+ *             </div>
+ *         </div>
+ *         <div class="card">
+ *             <div class="face face1">
+ *                 <div class="content">
+ *                     <div class="icon">
+ *                         <i class="fa fa-github-square" aria-hidden="true"></i>
+ *                     </div>
+ *                 </div>
+ *             </div>
+ *             <div class="face face2">
+ *                 <div class="content">
+ *                     <h3>
+ *                         <a href="https://github.com/atom888" target="_blank">atom888</a>
+ *                     </h3>
+ *                     <p>This is where I share code and work on projects.</p>
+ *                 </div>
+ *             </div>
+ *         </div>
+ *     </div>
+ */

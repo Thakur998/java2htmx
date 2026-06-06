@@ -166,6 +166,10 @@ public class Page extends Component {
                 "  rel=\"stylesheet\"\n" +
                 "  href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css\"\n" +
                 ">");
+
+        html.append("""
+                <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+                """);
         for (String css : cssFiles) {
 
             html.append(

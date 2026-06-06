@@ -2,8 +2,10 @@ package com.j2htmx.auto.base;
 
 
 import com.j2htmx.auto.components.Form;
+import tools.jackson.databind.ObjectMapper;
 
 import java.util.Arrays;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public abstract class Component extends NodeCreator {
@@ -45,6 +47,11 @@ public abstract class Component extends NodeCreator {
 
     public Component customTag(String key, String value) {
         customTags.add(" " + key + "=\"" + value + "\"");
+        return this;
+    }
+
+    public Component customTag(String key) {
+        customTags.add(" " + key + "=\"");
         return this;
     }
 
@@ -96,8 +103,22 @@ public abstract class Component extends NodeCreator {
         return this;
     }
 
-    public Component vals(String vals) {
-        setHxVals(vals);
+    public Component vals(Map<String, ?> values) {
+
+        try {
+
+            ObjectMapper mapper =
+                    new ObjectMapper();
+
+            setHxVals(
+                    mapper.writeValueAsString(values)
+            );
+
+        } catch (Exception e) {
+
+            throw new RuntimeException(e);
+        }
+
         return this;
     }
 
@@ -386,7 +407,7 @@ public abstract class Component extends NodeCreator {
     }
 
     public Component target(String target) {
-        setHxTarget(target);
+        setHxTarget("#"+target);
         return this;
     }
 
