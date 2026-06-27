@@ -1,3 +1,11 @@
+   document.querySelectorAll(".lesson-column").forEach(column => {
+
+        new Sortable(column, {
+            group: "lesson-plans",
+            animation: 150
+        });
+
+    });
 document.body.addEventListener("htmx:afterSwap", function(evt) {
 
     evt.target.querySelectorAll(".lesson-column").forEach(column => {

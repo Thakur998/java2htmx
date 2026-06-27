@@ -180,7 +180,7 @@
 }
 
 .lesson-column:empty::before {
-    content: "Drop lessons here";
+    content: "Drop Jobs Here";
 
     display: block;
 
@@ -648,3 +648,36 @@
   background: var(--card-background-color);
   border-radius: 0.5rem;
 }
+
+.job-detail {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.job-header {
+    padding: 1rem;
+    border-bottom: 1px solid var(--pico-muted-border-color);
+}
+
+.job-actions {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.job-meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.job-section {
+    margin-top: 2rem;
+}
+
+.meta-item {
+    padding: 1rem;
+    border-radius: 8px;
+    background: var(--pico-card-background-color);
+}
+

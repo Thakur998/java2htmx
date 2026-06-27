@@ -62,6 +62,7 @@ public abstract class Component extends NodeCreator {
         return this;
     }
 
+
     public Component id(String id) {
         setId(id);
         setRawId(id);
@@ -157,16 +158,6 @@ public abstract class Component extends NodeCreator {
         return this;
     }
 
-    public Component row() {
-        addClass("j2-row");
-        return this;
-    }
-
-    public Component column() {
-        addClass("j2-column");
-        return this;
-    }
-
     public Component grid() {
         addClass("j2-grid");
         return this;
@@ -187,30 +178,18 @@ public abstract class Component extends NodeCreator {
         return this;
     }
 
-    public Component center() {
-        addClass("j2-center");
-        return this;
-    }
 
     public Component justifyStart() {
         addClass("j2-justify-start");
         return this;
     }
 
-    public Component justifyCenter() {
-        addClass("j2-justify-center");
-        return this;
-    }
 
     public Component justifyEnd() {
         addClass("j2-justify-end");
         return this;
     }
 
-    public Component justifyBetween() {
-        addClass("j2-justify-between");
-        return this;
-    }
 
     public Component justifyAround() {
         addClass("j2-justify-around");
@@ -227,11 +206,6 @@ public abstract class Component extends NodeCreator {
         return this;
     }
 
-    public Component alignCenter() {
-        addClass("j2-align-center");
-        return this;
-    }
-
     public Component alignEnd() {
         addClass("j2-align-end");
         return this;
@@ -241,10 +215,8 @@ public abstract class Component extends NodeCreator {
         addClass("j2-align-stretch");
         return this;
     }
-    public Component gap(int size) {
-        addClass("j2-gap-" + size);
-        return this;
-    }public Component fullWidth() {
+
+    public Component fullWidth() {
         addClass("j2-w-full");
         return this;
     }
@@ -277,14 +249,7 @@ public abstract class Component extends NodeCreator {
         addClass("j2-h-screen");
         return this;
     }
-    public Component margin(int size) {
-        addClass("j2-m-" + size);
-        return this;
-    }
-    public Component padding(int size) {
-        addClass("j2-p-" + size);
-        return this;
-    }
+
     public Component container() {
         addClass("j2-container");
         return this;
@@ -497,15 +462,6 @@ public abstract class Component extends NodeCreator {
         return this;
     }
 
-    public Component centerX() {
-        addClass("j2-center-x");
-        return this;
-    }
-
-    public Component centerY() {
-        addClass("j2-center-y");
-        return this;
-    }
 
     public Component centerScreen() {
         addClass("j2-center-screen");
@@ -606,6 +562,38 @@ public abstract class Component extends NodeCreator {
         return this;
     }
 
+    public Component bottom(int px) {
+
+        return css(
+                "bottom",
+                px + "px"
+        );
+    }
+
+    public Component top(int px) {
+
+        return css(
+                "top",
+                px + "px"
+        );
+    }
+
+    public Component left(int px) {
+
+        return css(
+                "left",
+                px + "px"
+        );
+    }
+
+    public Component right(int px) {
+
+        return css(
+                "right",
+                px + "px"
+        );
+    }
+
     public enum HxTrigger {
 
         CLICK("click"),
@@ -643,6 +631,266 @@ public abstract class Component extends NodeCreator {
 
         return this;
     }
+
+
+
+
+
+    public void addInlineStyle(String style) {
+
+        if (this.style == null || this.style.isBlank()) {
+
+            this.style =
+                    " style='" + style + "' ";
+
+            return;
+        }
+
+        int end =
+                this.style.lastIndexOf("'");
+
+        if (end > 0) {
+
+            this.style =
+                    this.style.substring(0, end)
+                            + style
+                            + "'";
+        }
+    }
+
+    public Component css(
+            String property,
+            String value) {
+
+        addInlineStyle(
+                property + ":" + value + ";"
+        );
+
+        return this;
+    }
+
+    public Component x(int px) {
+
+        return css(
+                "left",
+                px + "px"
+        );
+    }
+
+    public Component y(int px) {
+
+        return css(
+                "top",
+                px + "px"
+        );
+    }
+
+    public Component width(int px) {
+
+        return css(
+                "width",
+                px + "px"
+        );
+    }
+
+    public Component height(int px) {
+
+        return css(
+                "height",
+                px + "px"
+        );
+    }
+
+    public Component absolute() {
+
+        return css(
+                "position",
+                "absolute"
+        );
+    }
+
+    public Component relative() {
+
+        return css(
+                "position",
+                "relative"
+        );
+    }
+
+    public Component fixed() {
+
+        return css(
+                "position",
+                "fixed"
+        );
+    }
+
+
+    public Component z(int value) {
+
+        return css(
+                "z-index",
+                String.valueOf(value)
+        );
+    }
+
+    public Component centerX() {
+
+        css(
+                "left",
+                "50%"
+        );
+
+        css(
+                "transform",
+                "translateX(-50%)"
+        );
+
+        return this;
+    }
+
+    public Component centerY() {
+
+        css(
+                "top",
+                "50%"
+        );
+
+        css(
+                "transform",
+                "translateY(-50%)"
+        );
+
+        return this;
+    }
+
+    public Component center() {
+
+        css(
+                "left",
+                "50%"
+        );
+
+        css(
+                "top",
+                "50%"
+        );
+
+        css(
+                "transform",
+                "translate(-50%,-50%)"
+        );
+
+        return this;
+    }
+
+    public Component row() {
+
+        css(
+                "display",
+                "flex"
+        );
+
+        return this;
+    }
+
+    public Component column() {
+
+        css(
+                "display",
+                "flex"
+        );
+
+        css(
+                "flex-direction",
+                "column"
+        );
+
+        return this;
+    }
+
+    public Component alignCenter() {
+
+        css(
+                "align-items",
+                "center"
+        );
+
+        return this;
+    }
+
+    public Component justifyCenter() {
+
+        css(
+                "justify-content",
+                "center"
+        );
+
+        return this;
+    }
+
+    public Component centerContent() {
+
+        return row()
+                .alignCenter()
+                .justifyCenter();
+    }
+
+    public Component gap(int px) {
+
+        return css(
+                "gap",
+                px + "px"
+        );
+    }
+
+    public Component padding(int px) {
+
+        return css(
+                "padding",
+                px + "px"
+        );
+    }
+
+    public Component margin(int px) {
+
+        return css(
+                "margin",
+                px + "px"
+        );
+    }
+
+    public Component fullscreen() {
+
+        return fixed()
+                .x(0)
+                .y(0)
+                .css("width", "100vw")
+                .css("height", "100vh");
+    }
+
+    public Component justifyBetween() {
+
+        return css(
+                "justify-content",
+                "space-between"
+        );
+    }
+
+    public Component text(String text) {
+
+        setContent(text);
+
+        return this;
+    }
+
+    public Component bringToFront() {
+
+        addClass("bring-to-front");
+
+        return this;
+    }
+
 
 }
 

@@ -1,5 +1,8 @@
 package com.j2htmx.auto.base;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -103,6 +106,8 @@ public class NodeCreator implements Serializable, HtmxNode {
     protected String misc = "";
     protected String classStyle = "";
     protected String For = "";
+    @Getter
+    @Setter
     protected String rawId = "";
     protected String content = "";
     protected String hxOn = "";
@@ -124,6 +129,7 @@ public class NodeCreator implements Serializable, HtmxNode {
     protected String type = "";
     protected String height = "";
     protected String hxPost = "";
+    @Getter
     protected String id = "";
     protected List<String> customTags = new ArrayList<>();
     private final NodeRenderStrategy renderStrategy;
@@ -284,10 +290,6 @@ public class NodeCreator implements Serializable, HtmxNode {
 
     public void setId(String id) {
         this.id = " id='" + id + "'";
-    }
-
-    public void setRawId(String id) {
-        this.rawId = id;
     }
 
     public void setContent(NodeCreator... nodeCreators) {

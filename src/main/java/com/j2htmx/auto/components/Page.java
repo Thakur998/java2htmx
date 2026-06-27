@@ -160,13 +160,6 @@ public class Page extends Component {
         }
 
 
-        //Custom sheet
-        html.append("<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css\">");
-        html.append("<link\n" +
-                "  rel=\"stylesheet\"\n" +
-                "  href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css\"\n" +
-                ">");
-
         html.append("""
                 <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
                 """);
@@ -176,6 +169,9 @@ public class Page extends Component {
                             "<link rel='stylesheet' href='/css/")
                     .append(css)
                     .append("'>");
+            html.append("<link\n" +
+                    "  href=\"https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap\"\n" +
+                    "  rel=\"stylesheet\">");
         }
 
         if (useHtmx) {
