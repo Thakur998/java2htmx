@@ -47,7 +47,10 @@ public class HomeScreen extends Page {
                 ).append().target("desktop").vals(Map.of("applicationId", "music")).get("/open-app"),
                 new DockIcon(
                         "⚙"
-                ).append().target("desktop").vals(Map.of("applicationId", "settings")).get("/open-app")
+                ).append().target("desktop").vals(Map.of("applicationId", "settings")).get("/open-app"),
+                new DockIcon(
+                        "G"
+                ).append().target("desktop").vals(Map.of("applicationId", "graph")).get("/open-app")
         ));
 
 

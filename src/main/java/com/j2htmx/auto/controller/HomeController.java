@@ -13,11 +13,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 public class HomeController {
 
     @Autowired
     AppRegistry appRegistry;
+
+    @Autowired
+    FolderRegistry folderRegistry;
 
     @GetMapping
     public String getNewHome() {
@@ -34,12 +39,19 @@ public class HomeController {
         return "";
     }
 
+    @GetMapping("/open-folder")
+    public String openFolder(@ModelAttribute FolderDetails folderDetails) {
+        System.out.println(folderDetails.toString());
+        return folderRegistry.getFolder(folderDetails.folderId()).render();
+    }
     @GetMapping("/desktop/create-folder")
     public String createFolder(@ModelAttribute FolderDetails folderDetails) {
-        return new DesktopIcon(
+        DesktopIcon created = (DesktopIcon) new DesktopIcon(
                 "📁",
                 folderDetails.folderId()
-        ).addClazz("draggable-window").render();
+        ).addClazz("draggable-window").get("/open-folder").vals(Map.of("folderId", folderDetails.folderId())).target("desktop-area").append();
+        folderRegistry.createFolder(folderDetails.folderId(), created);
+        return created.render();
     }
 
     @GetMapping("/desktop/new-folder")
@@ -147,5 +159,7 @@ public class HomeController {
                         "/desktop/refresh"
                 ).render();
     }
+
+
 
 }

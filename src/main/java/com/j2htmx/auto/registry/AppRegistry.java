@@ -3,10 +3,9 @@ package com.j2htmx.auto.registry;
 import com.j2htmx.auto.annotations.Node;
 import com.j2htmx.auto.base.Component;
 import com.j2htmx.auto.components.*;
-import com.j2htmx.auto.solar.Launcher;
-import com.j2htmx.auto.solar.LauncherTile;
-import com.j2htmx.auto.solar.Settings;
-import com.j2htmx.auto.solar.Window;
+import com.j2htmx.auto.service.Grid;
+import com.j2htmx.auto.service.Music;
+import com.j2htmx.auto.solar.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -53,71 +52,8 @@ public class AppRegistry {
 
         gallery.draggable();
 
-        Window music =
-
-                (Window) new Window(
-                        "Music",
-                        "music",
-
-                        new Div()
-
-                                .clazz("music-player")
-
-                                .add(
-                                        new Div()
-                                                .add(new Image("https://images.unsplash.com/photo-1712507123246-476b08ae363f?q=80&w=1475&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D").clazz("gallery-image"))
-                                                .clazz("album-art")
-                                )
-
-                                .add(
-                                        new Div()
-                                                .text("No Song Playing")
-                                                .clazz("song-title")
-                                )
-
-                                .add(
-                                        new Div()
-                                                .text("Feeling good")
-                                                .clazz("song-artist")
-                                )
-
-                                .add(
-                                        new Div()
-
-                                                .clazz("music-controls")
-
-                                                .add(
-                                                        new Button()
-                                                                .text("⏮")
-                                                )
-
-                                                .add(
-                                                        new Button()
-                                                                .text("▶")
-                                                )
-
-                                                .add(
-                                                        new Button()
-                                                                .text("⏭")
-                                                )
-                                )
-                )
-
-                        .left(20)
-
-                        .top(100)
-
-                        .width(250)
-
-                        .height(580)
-
-                        .id("music")
-
-                        .absolute();
-
-        music.draggable();
-
         Window notesWindow =
+
 
                 (Window) new Window(
 
@@ -168,12 +104,42 @@ public class AppRegistry {
 
         notesWindow.draggable();
 
+        Window graph = (Window) new Window(
+
+                "GRAPH",
+
+                "graph",
+
+                new Div()
+
+                        .clazz("graph-app")
+                        .add(new H2("GAME OF LIFE"))
+                        .add(new CustomButton().arrowButton("START","/next","grid").above(2).below(2).replaceContent())
+                        .add(new Div().id("grid").add(new Grid().generateGrid(25,25)))
+
+
+        )
+
+                .id("graph")
+
+                .hidden()
+
+                .left(20)
+
+                .top(100)
+
+                .width(750)
+
+                .height(900);
+
+        graph.draggable();
         apps.put("notes", notesWindow);
         apps.put("gallery", gallery);
-        apps.put("music", music);
+        apps.put("music", new Music().musicplayer());
         apps.put("settings", new Settings().getSettings());
         apps.put("browser", getBrowser());
         apps.put("launcher", getLauncher());
+        apps.put("graph", graph);
     }
 
 
@@ -235,9 +201,9 @@ public class AppRegistry {
                 .width("100%")
 
                 .height("100%");
-                window.draggable();
-                window.id("launcher");
-          return window;
+        window.draggable();
+        window.id("launcher");
+        return window;
     }
 
     public static Window getBrowser() {
