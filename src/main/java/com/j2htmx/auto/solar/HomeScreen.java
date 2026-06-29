@@ -50,7 +50,14 @@ public class HomeScreen extends Page {
                 ).append().target("desktop").vals(Map.of("applicationId", "settings")).get("/open-app"),
                 new DockIcon(
                         "G"
-                ).append().target("desktop").vals(Map.of("applicationId", "graph")).get("/open-app")
+                ).append().target("desktop").vals(Map.of("applicationId", "graph")).get("/open-app"),
+                new DockIcon(
+                        "S"
+                ).append().target("desktop").vals(Map.of("applicationId", "demo")).get("/open-app"),
+                new DockIcon(
+                        "F"
+                ).append().target("desktop").vals(Map.of("applicationId", "fractal")).get("/open-app")
+
         ));
 
 

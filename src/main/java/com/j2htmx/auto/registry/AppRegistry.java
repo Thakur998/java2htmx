@@ -9,11 +9,20 @@ import com.j2htmx.auto.solar.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Node
 public class AppRegistry {
     private static final Map<String, Window> apps =
             new HashMap<>();
+
+    public static final BlockingQueue<String> FRAME_CACHE =
+            new LinkedBlockingQueue<>(32);
+
+    private static volatile double zoom = 1.0;
+
 
     static {
         Window gallery = (Window) new Window("Gallery", "gallery",
@@ -140,8 +149,21 @@ public class AppRegistry {
         apps.put("browser", getBrowser());
         apps.put("launcher", getLauncher());
         apps.put("graph", graph);
+        apps.put("fractal", generateFractal());
+        apps.put("demo", getDemo());
     }
+    public static Window getDemo() {
+        Window window = (Window) new Window("Demo", "demo", new Slideshow("https://i.ibb.co/Txbqp5yP/b84a1598-f432-484c-a143-5888d68b1c0c.png", "https://i.ibb.co/3y94dhZY/23c14a84-d569-49fb-ad86-1dce8f7c298e.png", "https://i.ibb.co/3y94dhZY/23c14a84-d569-49fb-ad86-1dce8f7c298e.png","https://i.ibb.co/DNPdq7Q/57781612-39e1-4c3e-8103-aef9f72e5a90.png")).left(20)
 
+                .top(100)
+
+                .width("100%")
+
+                .height("100%");
+        window.id("demo");
+        window.draggable();
+        return window;
+    }
 
     public static void register(
             String id,
@@ -285,5 +307,125 @@ public class AppRegistry {
         browser.draggable();
 
         return browser;
+    }
+
+    public static Window generateFractal() {
+        Window fractal = (Window) new Window(
+
+                "Fractal",
+
+                "fractal",
+
+                    new Div().as("canvas").id("fractal-window").customTag("width","800").customTag("height","800"),
+                new Div().as("script").add("""
+        (() => {
+
+            const canvas = document.getElementById("fractal-window");
+            const ctx = canvas.getContext("2d");
+
+            ctx.imageSmoothingEnabled = false;
+
+            const img = new Image();
+
+            function render() {
+
+                img.onload = () => {
+
+                    ctx.drawImage(
+                        img,
+                        0,
+                        0,
+                        canvas.width,
+                        canvas.height
+                    );
+
+                };
+
+                img.src="/fractal.png?t="+performance.now();
+
+            }
+
+            render();
+
+            setInterval(render,33);
+
+        })();
+    """)
+                ).id("fractal");
+
+//                new Div()
+//
+//                        .clazz("grid-fractal")
+//                        .add(new H2("Fractal"))
+//                        .add(new CustomButton().arrowButton("START","/fractal-generate","grid-fractal").above(2).below(2).replaceContent())
+//                        .add(new Div().id("grid-fractal").add(new Grid().generateFractalGrid(100 ,100)))
+//
+//
+//        )
+//
+//                .id("fractal")
+//
+//                .hidden()
+//
+//                .left(20)
+//
+//                .top(100)
+//
+//                .width(750)
+//
+//                .height(900);
+
+        fractal.draggable();
+        return fractal;
+    }
+
+    private static final AtomicBoolean RENDERER_STARTED = new AtomicBoolean(false);
+
+    public static void startFractalRenderer() {
+
+        if (!RENDERER_STARTED.compareAndSet(false, true)) {
+            return;
+        }
+
+        Thread renderer = new Thread(() -> {
+
+            while (!Thread.currentThread().isInterrupted()) {
+
+                try {
+
+                    if (FRAME_CACHE.size() < 24) {
+
+                        zoom *= 1.005;
+
+                        Grid.grid = Grid.generateFractal(100, 100, zoom);
+
+                        FRAME_CACHE.put(
+                                new Grid()
+                                        .generateFractalGrid(100, 100)
+                                        .trigger("'every 10ms'")
+                                        .target("grid-fractal")
+                                        .get("/fractal-generate")
+                                        .render()
+                        );
+
+                    } else {
+
+                        Thread.sleep(2);
+
+                    }
+
+                } catch (InterruptedException e) {
+
+                    Thread.currentThread().interrupt();
+
+                }
+
+            }
+
+        });
+
+        renderer.setDaemon(true);
+        renderer.setName("Fractal Renderer");
+        renderer.start();
     }
 }
